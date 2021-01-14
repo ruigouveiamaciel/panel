@@ -48,10 +48,11 @@ export default () => {
         <Navigation>
             <div css={tw`mx-auto w-full flex items-center`} style={{ maxWidth: '1200px', height: '3.5rem' }}>
                 <div id={'logo'}>
-                    <Link to={'/'}>
+                    <Link to={'/'} >
                         <img src="/logo.png" style={{
                             width: "auto",
-                            height: "100%"
+                            height: "2.25rem",
+                            display: "inline"
                         }} />
                     </Link>
                 </div>
