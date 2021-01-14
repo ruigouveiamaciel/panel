@@ -14,22 +14,22 @@ jobs:
     if: "!contains(github.ref, 'develop') || (!contains(github.event.head_commit.message, 'skip docker') && !contains(github.event.head_commit.message, 'docker skip'))"
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/login-action@v1
+      - uses: crazy-max/ghaction-docker-meta@v1
+        id: docker_meta
+        with:
+          images: docker.pkg.github.com/${{ github.repository }}/panel
+      - name: Login to Github Repository
+        uses: docker/login-action@v1
         with:
           registry: docker.pkg.github.com
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Release Production Build
+      - name: Build Image
         uses: docker/build-push-action@v2
         if: "!contains(github.ref, 'develop')"
         with:
-          push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/panel:latest
-      - name: Release Development Build
-        uses: docker/build-push-action@v2
-        if: "contains(github.ref, 'develop')"
-        with:
-          push: ${{ github.event_name != 'pull_request' }}
+          load: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+      - name: Push Image
+        run: docker push ${{ steps.docker_meta.outputs.tags }}
