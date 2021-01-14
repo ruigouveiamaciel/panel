@@ -7,7 +7,6 @@ import { ApplicationStore } from '@/state';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
 import tw, { theme } from 'twin.macro';
 import styled from 'styled-components/macro';
-import logo from "../assets/img/logo.png"
 
 const Navigation = styled.div`
     ${tw`w-full bg-neutral-900 shadow-md overflow-x-auto`};
@@ -50,7 +49,7 @@ export default () => {
             <div css={tw`mx-auto w-full flex items-center`} style={{ maxWidth: '1200px', height: '3.5rem' }}>
                 <div id={'logo'}>
                     <Link to={'/'}>
-                        <img src={logo} style={{
+                        <img src="/logo.png" style={{
                             width: "auto",
                             height: "100%"
                         }} />
