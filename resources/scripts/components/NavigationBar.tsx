@@ -51,9 +51,9 @@ export default () => {
                 <div id={'logo'}>
                     <Link to={'/'}>
                         <img src={logo} style={{
-                            width: "auto";
-                            height: "100%";
-                        }}>
+                            width: "auto",
+                            height: "100%"
+                        }} />
                     </Link>
                 </div>
                 <RightNavigation>
